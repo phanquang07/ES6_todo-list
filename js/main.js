@@ -19,9 +19,12 @@ let displayTaskList = () => {
   let content = ''
   taskList.map((task, index) => {
     content += `
-    <li>${task}</li>
-    <span><i class="fa-solid fa-trash-can"></i></span>
-    <span><i class="fa-regular fa-circle-check"></i></span>
+    <li>${task}
+    <div class="task-action">
+      <i class="far fa-trash-alt"></i>
+      <i class="far fa-check-circle"></i>
+    </div>
+    </li>
   `
   })
   getELE('#todo').innerHTML = content
@@ -33,11 +36,12 @@ let addTask = () => {
   let taskInput = getELE("#newTask").value.trim()
   if (taskInput == '') {
     alert('Bạn cần nhập nội dung công việc')
+  } else {
+    taskList = [taskInput, ...taskList]
+    displayTaskList(taskList)
+    setLocalStorage()
+    getELE('#newTask').value = ''
   }
-  taskList = [taskInput, ...taskList]
-  displayTaskList(taskList)
-  setLocalStorage()
-  getELE('#newTask').value = ''
 }
 getELE("#addItem").onclick = addTask
 
