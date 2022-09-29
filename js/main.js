@@ -1,4 +1,5 @@
 let taskList = []
+// let id = 0
 let getELE = (id) => document.querySelector(id)
 
 // Save to local storage
@@ -19,9 +20,9 @@ let displayTaskList = () => {
   let content = ''
   taskList.map((task, index) => {
     content += `
-    <li>${task}
+    <li>${task.content}
     <div class="task-action">
-      <i class="far fa-trash-alt"></i>
+      <i class="far fa-trash-alt" onclick="deleteTask('${index}')"></i>
       <i class="far fa-check-circle"></i>
     </div>
     </li>
@@ -37,11 +38,19 @@ let addTask = () => {
   if (taskInput == '') {
     alert('Bạn cần nhập nội dung công việc')
   } else {
-    taskList = [taskInput, ...taskList]
-    displayTaskList(taskList)
+    taskList = [{ content: taskInput, isDone: false }, ...taskList]
+    displayTaskList(taskList.content)
     setLocalStorage()
     getELE('#newTask').value = ''
   }
 }
 getELE("#addItem").onclick = addTask
 
+let deleteTask = (index) => {
+  taskList.filter((index) => {
+    return index != index
+  })
+  taskList.splice(index, 1)
+  setLocalStorage()
+  displayTaskList()
+}
