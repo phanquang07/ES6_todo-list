@@ -328,3 +328,8 @@ ul.todo#completed li .buttons .complete .far{
 ul.todo#completed span{
   color: #25b99a;
 }
+
+.task-action i {
+  padding: 10px 5px;
+  cursor: pointer;
+}
